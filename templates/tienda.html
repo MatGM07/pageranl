@@ -41,7 +41,7 @@
                                         <h5 class="card-title">{{producto.nombre}}</h5>
                                         <p class="card-text">{{producto.categoria}}</p>
                                         <p class="card-text">{{producto.precio}}</p>
-                                        <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al carrito</a>
+                                        <a href="{% url 'ver_producto' producto.id %}" class="btn btn-primary">Ver Producto</a>
                                     </div>
                                 </div>
                             </div>
@@ -49,9 +49,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-4">
-                {% include "carrito.html" %}
             </div>
         </div>
     </div>

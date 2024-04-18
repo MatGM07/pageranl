@@ -10,8 +10,12 @@ header svg{
     color: white;
 }
 .colorlink{
-    color: #6ea8fe !important;
+    color: #e0e0e0 !important;
 }
 .colorlink:hover{
-    color: #8bb9fe !important;
+    color: cornflowerblue !important;
+}
+#homebutton:hover{
+    background-color: #e0e0e0!important;
+    color: #0D6EFD!important;
 }

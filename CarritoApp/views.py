@@ -34,3 +34,7 @@ def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
     return redirect("Tienda")
+@login_required
+def ver_producto(request, producto_id):
+    producto = Producto.objects.get(pk=producto_id)
+    return render(request, 'detalle_producto.html', {'producto': producto})

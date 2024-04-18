@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 import numpy as np
 from django.shortcuts import get_object_or_404
@@ -21,9 +22,24 @@ def product_transition_view(request, product_origen_id, product_destino_id):
         return redirect('login')
 
 
-def pagerank(request):
+def pagerank(request, Transition):
     threshold = 0.0000000000001
     beta = 0.85
+
+    movimientos = Transition.objects.all()
+    productos = Producto.objects.all()
+    Data = list[list[int]]
+    i=0
+
+    for producto in productos:
+        pagina = list[int]
+        for producto1 in productos:
+            i=0
+            for movimiento in movimientos:
+                if movimiento.source_product.id == producto.id and movimiento.destination_product.id == producto1.id:
+                    i=1
+            pagina.append(i)
+        Data.append(pagina)
 
     '''
     # Our Good Network

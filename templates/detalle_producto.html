@@ -53,7 +53,6 @@
         <hr>
     </div>
     <div class="container">
-<<<<<<< HEAD
         <br>
         <h2 class="mx4">TAMBIEN TE PODRIA INTERESAR</h2>
         <br>
@@ -83,21 +82,6 @@
                 </div>
             </div>
         </div>
-=======
-        {% for otro in otros %}
-                            <div class="col-3">
-                                <div class="card mb-3" style="width: 18rem;">
-                                  <img src="{% static "/images/iphone.jpg" %}" class="card-img-top" alt="">
-                                  <div class="card-body">
-                                    <h5 class="card-title">{{otro.nombre}}</h5>
-                                    <p class="card-text">${{ otro.precio }}</p>
-                                    <a href="{% url 'ver_producto' otro.id producto.id %}" class="btn btn-primary">Ver Producto</a>
-                                      
-                                  </div>
-                                </div>
-                            </div>
-        {% endfor %}
->>>>>>> 2cf70961e0866ab49ae806b4f41d2237aa9ed521
     </div>
 </body>
 </html>

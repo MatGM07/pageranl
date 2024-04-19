@@ -70,7 +70,7 @@ def pagerank(Transition):
          [1, 0, 0, 0],
          [1, 1, 0, 0],
          [1, 1, 0, 1]]
-    '''
+    
     A=Data
     arr = np.array(A, dtype=float)
 
@@ -110,3 +110,4 @@ def pagerank(Transition):
     print("The final rank vector: ")
     print(r[:, 0])
 
+'''

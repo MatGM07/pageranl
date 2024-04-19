@@ -47,5 +47,6 @@ def limpiar_carrito(request):
 def ver_producto(request, producto_id):
     # Obtener el producto por su id
     producto = get_object_or_404(Producto, id=producto_id)
+    otros = Producto.objects.exclude(id=producto_id)
     # Renderizar la plantilla con los detalles del producto
-    return render(request, 'detalle_producto.html', {'producto': producto})
+    return render(request, 'detalle_producto.html', {'producto': producto,'otros':otros})

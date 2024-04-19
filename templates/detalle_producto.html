@@ -62,7 +62,7 @@
                     <div class="col-12">
                         <div class="row">
                             {% for otro in otros %}
-                                <a href="/producto/{{ otro.id }}" class="col-3 text-decoration-none" style="width: 18rem; margin-left: 1rem;">
+                                <a href="{% url 'ver_producto' otro.id producto.id %}" class="col-3 text-decoration-none" style="width: 18rem; margin-left: 1rem;">
                                     <div class="col-3">
                                         <div class="card mb-3 sombra" style="width: 18rem;">
                                           <div class="d-flex" style="height: 17rem">

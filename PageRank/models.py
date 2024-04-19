@@ -27,3 +27,17 @@ class Transition(models.Model):
 
         return transition
 
+class UserViewCount(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    view_count = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.user.username} - View Count: {self.view_count}'
+
+class ProductProb(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    Product = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    Prob = models.FloatField(default=0)
+
+    def __str__(self):
+        return f'{self.user.username} - Producto: {self.Product} - Prob: {self.Prob}'

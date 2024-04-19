@@ -25,7 +25,7 @@ def product_transition_view(request, product_origen_id, product_destino_id):
 
 def pagerank(Transition):
     threshold = 0.0000000000001
-    beta = 0.85
+    beta = 0.8
 
     movimientos = Transition.objects.all()
     productos = Producto.objects.all()
@@ -41,7 +41,7 @@ def pagerank(Transition):
                     i=1
             pagina.append(i)
         Data.append(pagina)
-
+    '''
     indices_a_eliminar = []
 
     for idx, datos in enumerate(Data):
@@ -52,7 +52,7 @@ def pagerank(Transition):
     # Eliminar las listas de Data cuya suma de elementos es cero
     for idx in reversed(indices_a_eliminar):  # Iterar en orden inverso para evitar problemas de índice cambiante
         del Data[idx]
-
+    '''
 
     for sublist in Data:
         # Imprimir los elementos de la lista interna
@@ -70,7 +70,7 @@ def pagerank(Transition):
          [1, 0, 0, 0],
          [1, 1, 0, 0],
          [1, 1, 0, 1]]
-
+    '''
     A=Data
     arr = np.array(A, dtype=float)
 
@@ -84,7 +84,10 @@ def pagerank(Transition):
     M = arr
 
     for j in range(0, len(A)):
-        M[:, j] = M[:, j] / s[j]
+        if  s[j]==0:
+            M[:, j] = 0.0000000000001
+        else:
+            M[:, j] = M[:, j] / s[j]
 
     print("Column stochastic probability matrix, M:")
     print(M)
@@ -109,4 +112,5 @@ def pagerank(Transition):
 
     print("The final rank vector: ")
     print(r[:, 0])
-    '''
+
+    return  r

@@ -11,12 +11,22 @@ from PageRank.models import Transition,ProductProb
 @login_required
 def tienda(request):
     username = request.user.username if request.user.is_authenticated else None
-    #return HttpResponse("Hola Pythonizando")
+    print(id)
     productos = Producto.objects.all()
-    IDsorganizados = ProductProb.objects.all().order_by('-Prob').values_list('Product', flat=True)
+    IDsorganizados = ProductProb.objects.filter(user_id=request.user.id).order_by('-Prob').values_list('Product', flat=True)
+
     arreglo = []
-    for i in range (len(IDsorganizados)):
-        arreglo.append(Producto.objects.get(id=IDsorganizados[i]))
+    if (len(IDsorganizados) == 0):
+
+        for i in productos:
+
+            print (i)
+        arreglo = productos
+    else:
+
+        for i in range (len(IDsorganizados)):
+            print(IDsorganizados[i])
+            arreglo.append(Producto.objects.get(id=IDsorganizados[i]))
     organizados = arreglo
     return render(request, "tienda.html", {'productos':productos,'username':username,'organizados':organizados})
 
@@ -68,12 +78,19 @@ def ver_producto(request, producto_id, origen_id):
             nuevaProb.save()
             h=h+1
 
-    IDsorganizados = ProductProb.objects.all().order_by('-Prob').values_list('Product', flat=True)
+    IDsorganizados = ProductProb.objects.filter(user_id=request.user.id).order_by('-Prob').values_list('Product', flat=True)
     arreglo = []
-    for i in range(len(IDsorganizados)):
-        if i!=producto_id:
-            arreglo.append(Producto.objects.get(id=IDsorganizados[i]))
-    organizados = arreglo
+    if (len(IDsorganizados) == 0):
+        organizados = todos
+    else:
+        for i in range(len(IDsorganizados)):
+            if (IDsorganizados[i] !=producto_id):
+                print(Producto.objects.get(id=IDsorganizados[i]))
+                arreglo.append(Producto.objects.get(id=IDsorganizados[i]))
+            else:
+                pass
+
+        organizados = arreglo
 
     producto = get_object_or_404(Producto, id=producto_id)
     if origen_id != "a":

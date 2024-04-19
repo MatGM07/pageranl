@@ -1,10 +1,13 @@
 header{
     background-color: #212529 !important;
+    position: fixed;
+    z-index: 3;
+    width: 100%;
 }
 header span{
     color: white !important;
-    margin-right: 5rem;
 }
+header
 header svg{
     margin: 0rem 1rem 0rem 1rem;
     color: white;
@@ -22,4 +25,8 @@ header svg{
 
 .sombra:hover{
     box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.3);
+}
+
+.filtro{
+    display: none;
 }

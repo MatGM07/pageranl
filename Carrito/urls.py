@@ -26,6 +26,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url='login/', permanent=False), name='index'),
     path('admin/', admin.site.urls),
     path('tienda/', tienda, name="Tienda"),
+    path('listaProductos/', lista_Productos, name="listaProductos"),
     path('agregar/<int:producto_id>/', agregar_producto, name="Add"),
     path('eliminar/<int:producto_id>/', eliminar_producto, name="Del"),
     path('restar/<int:producto_id>/', restar_producto, name="Sub"),
@@ -34,4 +35,6 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('producto/<int:producto_id>/', ver_producto, name='ver_producto')
+
+
 ]

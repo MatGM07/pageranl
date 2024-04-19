@@ -12,6 +12,13 @@ def tienda(request):
     #return HttpResponse("Hola Pythonizando")
     productos = Producto.objects.all()
     return render(request, "tienda.html", {'productos':productos,'username':username})
+
+@login_required
+def lista_productos(request):
+    username = request.user.username if request.user.is_authenticated else None
+    productos = Producto.objects.all()
+    return render(request, "listaProductos.html", {'productos': productos, 'username': username})
+
 @login_required
 def agregar_producto(request, producto_id):
     carrito = Carrito(request)

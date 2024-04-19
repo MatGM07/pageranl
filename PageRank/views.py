@@ -41,7 +41,7 @@ def pagerank(Transition):
                     i=1
             pagina.append(i)
         Data.append(pagina)
-
+    '''
     indices_a_eliminar = []
 
     for idx, datos in enumerate(Data):
@@ -52,7 +52,7 @@ def pagerank(Transition):
     # Eliminar las listas de Data cuya suma de elementos es cero
     for idx in reversed(indices_a_eliminar):  # Iterar en orden inverso para evitar problemas de índice cambiante
         del Data[idx]
-
+    '''
 
     for sublist in Data:
         # Imprimir los elementos de la lista interna
@@ -70,7 +70,7 @@ def pagerank(Transition):
          [1, 0, 0, 0],
          [1, 1, 0, 0],
          [1, 1, 0, 1]]
-
+    '''
     A=Data
     arr = np.array(A, dtype=float)
 
@@ -109,4 +109,4 @@ def pagerank(Transition):
 
     print("The final rank vector: ")
     print(r[:, 0])
-    '''
+

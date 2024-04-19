@@ -64,7 +64,8 @@
                                   <div class="card-body">
                                     <h5 class="card-title">{{otro.nombre}}</h5>
                                     <p class="card-text">${{ otro.precio }}</p>
-                                    <a href="{% url 'ver_producto' otro.id %}" class="btn btn-primary">Ver Producto</a>
+                                    <a href="{% url 'ver_producto' otro.id producto.id %}" class="btn btn-primary">Ver Producto</a>
+                                      
                                   </div>
                                 </div>
                             </div>

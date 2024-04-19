@@ -33,7 +33,7 @@ urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('producto/<int:producto_id>/', ver_producto, name='ver_producto')
+    path('producto/<int:producto_id>/<str:origen_id>', ver_producto, name='ver_producto')
 
 
 ]

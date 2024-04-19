@@ -5,6 +5,8 @@ from django.shortcuts import render, get_object_or_404
 from CarritoApp.Carrito import Carrito
 from CarritoApp.models import Producto
 from django.contrib.auth.decorators import login_required
+from PageRank.views import product_transition_view, pagerank
+from PageRank.models import Transition
 
 @login_required
 def tienda(request):
@@ -44,9 +46,21 @@ def limpiar_carrito(request):
     return redirect("Tienda")
 
 @login_required()
-def ver_producto(request, producto_id):
+def ver_producto(request, producto_id, origen_id):
     # Obtener el producto por su id
     producto = get_object_or_404(Producto, id=producto_id)
+
+    if origen_id != "a":
+        numerica = int(origen_id)
+        origen = get_object_or_404(Producto, id=origen_id)
+        product_transition_view(request, origen.id, producto.id)
+    transiciones = Transition.objects.all()
+    cantidadTransiciones = transiciones.count()
+    if (cantidadTransiciones>0) and (cantidadTransiciones%2 == 0):
+        pagerank(Transition)
     otros = Producto.objects.exclude(id=producto_id)
     # Renderizar la plantilla con los detalles del producto
     return render(request, 'detalle_producto.html', {'producto': producto,'otros':otros})
+
+
+

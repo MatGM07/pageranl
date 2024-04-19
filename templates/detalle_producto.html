@@ -57,6 +57,18 @@
         <hr>
     </div>
     <div class="container">
+        {% for otro in otros %}
+                            <div class="col-3">
+                                <div class="card mb-3" style="width: 18rem;">
+                                  <img src="{% static "/images/iphone.jpg" %}" class="card-img-top" alt="">
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{otro.nombre}}</h5>
+                                    <p class="card-text">${{ otro.precio }}</p>
+                                    <a href="{% url 'ver_producto' otro.id %}" class="btn btn-primary">Ver Producto</a>
+                                  </div>
+                                </div>
+                            </div>
+        {% endfor %}
     </div>
 </body>
 </html>

@@ -26,7 +26,6 @@ urlpatterns = [
     path('', RedirectView.as_view(url='login/', permanent=False), name='index'),
     path('admin/', admin.site.urls),
     path('tienda/', tienda, name="Tienda"),
-    path('listaProductos/', lista_Productos, name="listaProductos"),
     path('agregar/<int:producto_id>/', agregar_producto, name="Add"),
     path('eliminar/<int:producto_id>/', eliminar_producto, name="Del"),
     path('restar/<int:producto_id>/', restar_producto, name="Sub"),

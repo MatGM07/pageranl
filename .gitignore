@@ -1,2 +1,5 @@
 newvenv
 .venv
+env
+CarritoApp/migrations/0002_producto_descripcion_producto_imagen.py
+CarritoApp/migrations/__pycache__/0002_producto_descripcion_producto_imagen.cpython-312.pyc

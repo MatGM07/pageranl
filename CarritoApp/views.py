@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from CarritoApp.Carrito import Carrito
@@ -11,6 +12,13 @@ def tienda(request):
     #return HttpResponse("Hola Pythonizando")
     productos = Producto.objects.all()
     return render(request, "tienda.html", {'productos':productos,'username':username})
+
+@login_required
+def lista_productos(request):
+    username = request.user.username if request.user.is_authenticated else None
+    productos = Producto.objects.all()
+    return render(request, "listaProductos.html", {'productos': productos, 'username': username})
+
 @login_required
 def agregar_producto(request, producto_id):
     carrito = Carrito(request)
@@ -34,7 +42,10 @@ def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
     return redirect("Tienda")
-@login_required
+
+@login_required()
 def ver_producto(request, producto_id):
-    producto = Producto.objects.get(pk=producto_id)
+    # Obtener el producto por su id
+    producto = get_object_or_404(Producto, id=producto_id)
+    # Renderizar la plantilla con los detalles del producto
     return render(request, 'detalle_producto.html', {'producto': producto})

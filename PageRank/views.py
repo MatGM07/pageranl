@@ -6,6 +6,7 @@ from .models import Transition
 from CarritoApp.models import Producto
 
 
+
 def product_transition_view(request, product_origen_id, product_destino_id):
     if request.user.is_authenticated:
         product_origen = get_object_or_404(Producto, pk=product_origen_id)
@@ -22,17 +23,17 @@ def product_transition_view(request, product_origen_id, product_destino_id):
         return redirect('login')
 
 
-def pagerank(request, Transition):
+def pagerank(Transition):
     threshold = 0.0000000000001
     beta = 0.85
 
     movimientos = Transition.objects.all()
     productos = Producto.objects.all()
-    Data = list[list[int]]
+    Data = []
     i=0
 
     for producto in productos:
-        pagina = list[int]
+        pagina = []
         for producto1 in productos:
             i=0
             for movimiento in movimientos:
@@ -41,13 +42,28 @@ def pagerank(request, Transition):
             pagina.append(i)
         Data.append(pagina)
 
+    indices_a_eliminar = []
+
+    for idx, datos in enumerate(Data):
+        suma = sum(datos)  # Calcular la suma de los elementos en la lista actual
+        if suma == 0:
+            indices_a_eliminar.append(idx)  # Agregar el índice de la lista a eliminar
+
+    # Eliminar las listas de Data cuya suma de elementos es cero
+    for idx in reversed(indices_a_eliminar):  # Iterar en orden inverso para evitar problemas de índice cambiante
+        del Data[idx]
+
+
+    for sublist in Data:
+        # Imprimir los elementos de la lista interna
+        print(sublist)
     '''
     # Our Good Network
     A=[[0,0,1,0],
        [1,0,0,1],
        [1,1,0,1],
        [1,0,0,0]]
-    '''
+    
 
     # Our Spider Trap Network
     A = [[0, 0, 1, 0],
@@ -55,6 +71,7 @@ def pagerank(request, Transition):
          [1, 1, 0, 0],
          [1, 1, 0, 1]]
 
+    A=Data
     arr = np.array(A, dtype=float)
 
     s = []
@@ -82,11 +99,7 @@ def pagerank(request, Transition):
     r_prev = r
 
     for i in range(1, 1001):
-        print("Iteration: ", i)
         r = beta * np.matmul(M, r_prev) + uniformR
-
-        print("The rank vector: ")
-        print(r)
 
         diff = np.sum(abs(r - r_prev))
         if (diff < threshold):
@@ -96,3 +109,4 @@ def pagerank(request, Transition):
 
     print("The final rank vector: ")
     print(r[:, 0])
+    '''

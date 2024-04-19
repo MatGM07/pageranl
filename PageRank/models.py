@@ -6,7 +6,6 @@ class Transition(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='link_transitions')
     source_product = models.ForeignKey(Producto, on_delete=models.CASCADE, related_name='source_transitions')
     destination_product = models.ForeignKey(Producto, on_delete=models.CASCADE, related_name='destination_transitions')
-    peso = models.IntegerField(default=0)
 
     class Meta:
         unique_together = ('user', 'source_product', 'destination_product')  # Combinación única de campos
@@ -16,17 +15,15 @@ class Transition(models.Model):
 
     @classmethod
     def register_transition(cls, user, product_origen, product_destino):
+        print("jisdsdjiajaij434")
         # Intenta obtener una instancia existente o crear una nueva
         transition, created = cls.objects.get_or_create(
             user=user,
-            product_origen=product_origen,
-            product_destino=product_destino
+            source_product=product_origen,
+            destination_product=product_destino
         )
 
         # Si la transición ya existe, aumenta el peso
-        if not created:
-            transition.peso += 1
-            transition.save()
 
         return transition
 

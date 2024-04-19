@@ -20,7 +20,7 @@ from django.urls import path
 from Login import views
 from django.views.generic import RedirectView
 
-from CarritoApp.views import tienda, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito
+from CarritoApp.views import tienda, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito, ver_producto, lista_productos
 
 urlpatterns = [
     path('', RedirectView.as_view(url='login/', permanent=False), name='index'),
@@ -33,4 +33,11 @@ urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', views.logout_view, name='logout'),
+<<<<<<< HEAD
+    path('producto/<int:producto_id>/', ver_producto, name='ver_producto')
+=======
+    path('producto/<int:producto_id>/<str:origen_id>', ver_producto, name='ver_producto')
+
+
+>>>>>>> 2cf70961e0866ab49ae806b4f41d2237aa9ed521
 ]
